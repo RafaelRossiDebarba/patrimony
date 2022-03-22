@@ -15,9 +15,8 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_departament")
-public class Departament implements Serializable {
-	
+@Table(name = "tb_category")
+public class Category implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -30,7 +29,7 @@ public class Departament implements Serializable {
 	@Embedded
 	private Audit audit = new Audit();
 	
-	public Departament() {
+	public Category () {
 		
 	}
 	
@@ -44,16 +43,20 @@ public class Departament implements Serializable {
 		audit.setDateLastEdition(Instant.now());
 	}
 
-	public long getId() {
-		return id;
-	}
-
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public long getId() {
+		return id;
 	}
 
 	@Override
@@ -69,8 +72,8 @@ public class Departament implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Departament other = (Departament) obj;
-		return Objects.equals(id, other.id) && Objects.equals(name, other.name);
+		Category other = (Category) obj;
+		return id == other.id && Objects.equals(name, other.name);
 	}
 	
 	

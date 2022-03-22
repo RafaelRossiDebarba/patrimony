@@ -36,7 +36,7 @@ public class DepartamentService {
 		return repository.save(departamentDb);
 	}
 	
-	public void deleteDepartament(Long id) {
+	public void deleteCategory(Long id) {
 		repository.deleteById(id);
 	}
 }
