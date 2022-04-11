@@ -4,9 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import br.upf.patrimony.entities.Category;
+import br.upf.patrimony.exceptions.DatabaseExcetion;
+import br.upf.patrimony.exceptions.ResourceNotFoundException;
 import br.upf.patrimony.repositories.CategoryRepository;
 
 @Service
@@ -37,6 +41,12 @@ public class CategoryService {
 	}
 	
 	public void deleteCategory(Long id) {
-		repository.deleteById(id);
+		try {
+			repository.deleteById(id);
+		} catch (EmptyResultDataAccessException e) {
+			throw new ResourceNotFoundException("Categoria não encontrado");
+		} catch (DataIntegrityViolationException e) {
+			throw new DatabaseExcetion("Categoria com vínculo existente");
+		}
 	}
 }

@@ -75,6 +75,14 @@ public class Category implements Serializable {
 		Category other = (Category) obj;
 		return id == other.id && Objects.equals(name, other.name);
 	}
+
+	public Audit getAudit() {
+		return audit;
+	}
+
+	public void setAudit(Audit audit) {
+		this.audit = audit;
+	}
 	
 	
 }

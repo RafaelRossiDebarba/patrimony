@@ -72,6 +72,13 @@ public class Departament implements Serializable {
 		Departament other = (Departament) obj;
 		return Objects.equals(id, other.id) && Objects.equals(name, other.name);
 	}
-	
+
+	public Audit getAudit() {
+		return audit;
+	}
+
+	public void setAudit(Audit audit) {
+		this.audit = audit;
+	}
 	
 }
