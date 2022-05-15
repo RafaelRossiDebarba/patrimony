@@ -17,11 +17,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tb_category")
 public class Category implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	
 	@Column(name = "name", length = 100)
 	private String name;
@@ -29,8 +30,7 @@ public class Category implements Serializable {
 	@Embedded
 	private Audit audit = new Audit();
 	
-	public Category () {
-		
+	public Category() {
 	}
 	
 	@PrePersist
@@ -43,6 +43,14 @@ public class Category implements Serializable {
 		audit.setDateLastEdition(Instant.now());
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -51,17 +59,17 @@ public class Category implements Serializable {
 		this.name = name;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public Audit getAudit() {
+		return audit;
 	}
 
-	public long getId() {
-		return id;
+	public void setAudit(Audit audit) {
+		this.audit = audit;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, name);
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -73,16 +81,7 @@ public class Category implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Category other = (Category) obj;
-		return id == other.id && Objects.equals(name, other.name);
+		return Objects.equals(id, other.id);
 	}
 
-	public Audit getAudit() {
-		return audit;
-	}
-
-	public void setAudit(Audit audit) {
-		this.audit = audit;
-	}
-	
-	
 }

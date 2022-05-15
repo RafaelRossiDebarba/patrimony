@@ -4,14 +4,11 @@ import java.io.Serializable;
 
 import br.upf.patrimony.entities.Patrimony;
 
-public class PatrimonyDTO implements Serializable{
+public class PatrimonyDTO implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-
-	private long id;
+	
+	private Long id;
 	private String name;
 	private Boolean status;
 	private String description;
@@ -19,10 +16,9 @@ public class PatrimonyDTO implements Serializable{
 	private String imgUrl;
 	
 	public PatrimonyDTO() {
-		
 	}
 
-	public PatrimonyDTO(long id, String name, Boolean status, String description, String code, String imgUrl) {
+	public PatrimonyDTO(Long id, String name, Boolean status, String description, String code, String imgUrl) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -41,11 +37,11 @@ public class PatrimonyDTO implements Serializable{
 		this.imgUrl = entity.getImgUrl();
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -53,8 +49,8 @@ public class PatrimonyDTO implements Serializable{
 		return name;
 	}
 
-	public void setName(String nome) {
-		this.name = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Boolean getStatus() {
@@ -88,6 +84,5 @@ public class PatrimonyDTO implements Serializable{
 	public void setImgUrl(String imgUrl) {
 		this.imgUrl = imgUrl;
 	}
-	
-	
+
 }

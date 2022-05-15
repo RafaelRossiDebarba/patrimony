@@ -7,11 +7,12 @@ import org.springframework.stereotype.Repository;
 
 import br.upf.patrimony.entities.Patrimony;
 
-
 @Repository
-public interface PatrimonyRepository extends JpaRepository<Patrimony, Long>{
+public interface PatrimonyRepository
+		extends JpaRepository<Patrimony, Long> {
 	
 	Page<Patrimony> findByNameContaining(
-			String name, Pageable pageable
+			String name, Pageable pageable 
 			);
+
 }

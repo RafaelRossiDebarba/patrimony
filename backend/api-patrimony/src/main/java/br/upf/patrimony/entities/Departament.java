@@ -17,12 +17,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tb_departament")
 public class Departament implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	
 	@Column(name = "name", length = 100)
 	private String name;
@@ -30,8 +30,7 @@ public class Departament implements Serializable {
 	@Embedded
 	private Audit audit = new Audit();
 	
-	public Departament() {
-		
+	public Departament() {	
 	}
 	
 	@PrePersist
@@ -44,8 +43,12 @@ public class Departament implements Serializable {
 		audit.setDateLastEdition(Instant.now());
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -56,9 +59,17 @@ public class Departament implements Serializable {
 		this.name = name;
 	}
 
+	public Audit getAudit() {
+		return audit;
+	}
+
+	public void setAudit(Audit audit) {
+		this.audit = audit;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, name);
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -70,15 +81,7 @@ public class Departament implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Departament other = (Departament) obj;
-		return Objects.equals(id, other.id) && Objects.equals(name, other.name);
+		return Objects.equals(id, other.id);
 	}
 
-	public Audit getAudit() {
-		return audit;
-	}
-
-	public void setAudit(Audit audit) {
-		this.audit = audit;
-	}
-	
 }

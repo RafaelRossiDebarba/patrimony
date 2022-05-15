@@ -29,50 +29,62 @@ public class PatrimonyResource {
 	
 	@Autowired
 	private PatrimonyService service;
-	
+
 	@GetMapping("/all")
 	public List<Patrimony> findAll() {
 		return service.findAll();
 	}
 	
 	@GetMapping("/byid/{id}")
-	public Patrimony findById(@PathVariable Long id) {
+	public Patrimony findByid(
+			@PathVariable Long id) {
 		return service.findById(id);
 	}
 	
 	@GetMapping("/filtered")
 	public ResponseEntity<Page<PatrimonyDTO>> findAllPaged(
-			@RequestParam(value = "page", defaultValue = "0") Integer page,
-			@RequestParam(value = "linesPerPage", defaultValue = "5") Integer linesPerPage,
-			@RequestParam(value = "orderBy", defaultValue = "name") String orderBy,
-			@RequestParam(value = "direction", defaultValue = "ASC") String direction,
-			@RequestParam(required = false) String name
+	@RequestParam(value="page", 
+					defaultValue = "0") Integer page,
+	@RequestParam(value = "linesPerPage",
+					defaultValue = "5") Integer linesPerPage,
+	@RequestParam(value = "orderBy",
+					defaultValue = "name") String orderBy,
+	@RequestParam(value = "direction",
+					defaultValue = "ASC") String direction,
+	@RequestParam(required = false) String name
 			) {
 		PageRequest pageRequest = PageRequest.of(
-				page,
-				linesPerPage,
-				Direction.valueOf(direction),
-				orderBy
-			);
+					page, linesPerPage, 
+					Direction.valueOf(direction), 
+					orderBy
+				);
 		
-		Page<PatrimonyDTO> list = service.findAllPaged(pageRequest, name);
+		Page<PatrimonyDTO> list = 
+					service.findAllPaged(pageRequest, name);
+		
 		return ResponseEntity.ok().body(list);
 	}
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Patrimony newPatrimony(@RequestBody Patrimony patrimony) {
+	public Patrimony newPatrimony(
+			@RequestBody Patrimony patrimony
+			) {
 		return service.newRegister(patrimony);
-	}
-	
-	@PutMapping("/{id}")
-	public Patrimony editPatrimony(@PathVariable Long id, @RequestBody Patrimony patrimony) {
-		return service.editPatrimony(id, patrimony);
 	}
 	
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deletePatrimony(@PathVariable Long id) {
+	public void deletePatrimony(
+			@PathVariable Long id) {
 		service.deletePatrimony(id);
+	}
+	
+	@PutMapping("/{id}")
+	public Patrimony editPatrimony(
+			@PathVariable Long id, 
+			@RequestBody Patrimony patrimony
+			) {
+		return service.editPatrimony(id, patrimony);
 	}
 }

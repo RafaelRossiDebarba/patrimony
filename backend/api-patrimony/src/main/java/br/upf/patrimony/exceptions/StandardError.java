@@ -4,11 +4,7 @@ import java.io.Serializable;
 import java.time.Instant;
 
 public class StandardError implements Serializable {
-	
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	
 	private Instant timestamp;
@@ -18,7 +14,6 @@ public class StandardError implements Serializable {
 	private String path;
 	
 	public StandardError() {
-		
 	}
 
 	public Instant getTimestamp() {
@@ -60,6 +55,5 @@ public class StandardError implements Serializable {
 	public void setPath(String path) {
 		this.path = path;
 	}
-	
-	
+
 }

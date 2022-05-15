@@ -7,17 +7,16 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class Audit implements Serializable{
+public class Audit implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
-	@Column(name = "date_register", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+	@Column(name = "date_register", 
+		columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant dateRegister;
-	
-	@Column(name = "date_last_edition", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+
+	@Column(name = "date_last_edition", 
+		columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant dateLastEdition;
 	
 	public Audit() {
@@ -40,6 +39,5 @@ public class Audit implements Serializable{
 		this.dateLastEdition = dateLastEdition;
 	}
 	
-	
-	
+
 }

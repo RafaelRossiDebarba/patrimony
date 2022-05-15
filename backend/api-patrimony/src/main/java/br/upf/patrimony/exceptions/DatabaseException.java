@@ -1,11 +1,11 @@
 package br.upf.patrimony.exceptions;
 
-public class ResourceNotFoundException
+public class DatabaseException
 				extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 	
-	public ResourceNotFoundException(String message) {
+	public DatabaseException(String message) {
 		super(message);
 	}
 

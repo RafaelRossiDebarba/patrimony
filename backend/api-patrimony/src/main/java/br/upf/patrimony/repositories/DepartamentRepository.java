@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import br.upf.patrimony.entities.Departament;
 
 @Repository
-public interface DepartamentRepository extends JpaRepository<Departament, Long>{
-	
+public interface DepartamentRepository
+		extends JpaRepository<Departament, Long>{
+
 }

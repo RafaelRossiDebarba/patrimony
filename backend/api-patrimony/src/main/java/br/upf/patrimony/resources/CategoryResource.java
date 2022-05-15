@@ -23,31 +23,38 @@ public class CategoryResource {
 	
 	@Autowired
 	private CategoryService service;
-	
+
 	@GetMapping("/all")
 	public List<Category> findAll() {
 		return service.findAll();
 	}
 	
 	@GetMapping("/byid/{id}")
-	public Category findById(@PathVariable Long id) {
+	public Category findByid(
+			@PathVariable Long id) {
 		return service.findById(id);
 	}
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Category newCategory(@RequestBody Category category) {
+	public Category newCategory(
+			@RequestBody Category category
+			) {
 		return service.newRegister(category);
-	}
-	
-	@PutMapping("/{id}")
-	public Category editCategory(@PathVariable Long id, @RequestBody Category category) {
-		return service.editCategory(id, category);
 	}
 	
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteCategory(@PathVariable Long id) {
+	public void deleteCategory(
+			@PathVariable Long id) {
 		service.deleteCategory(id);
+	}
+	
+	@PutMapping("/{id}")
+	public Category editCategory(
+			@PathVariable Long id, 
+			@RequestBody Category category
+			) {
+		return service.editCategory(id, category);
 	}
 }

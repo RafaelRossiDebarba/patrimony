@@ -25,72 +25,64 @@ import javax.persistence.Table;
 @Table(name = "tb_patrimony")
 public class Patrimony implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	
+	private Long id;
+
 	@Column(name = "name", length = 100)
 	private String name;
-	
+
 	@Column(name = "status")
 	private Boolean status;
-	
+
 	@Column(name = "description", length = 2000)
 	private String description;
-	
+
 	@Column(name = "code", length = 100)
 	private String code;
-	
+
 	@Column(name = "img_url", length = 500)
 	private String imgUrl;
-	
+
 	@Column(name = "price")
 	private Double price;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "departament", referencedColumnName = "id", nullable = false)
 	private Departament departament = new Departament();
-	
+
 	@ManyToMany
-	@JoinTable(
-			name = "tb_patrimony_category",
-			joinColumns = @JoinColumn(name = "patrimony_id"),
-			inverseJoinColumns = @JoinColumn(name = "category_id")
-			)
+	@JoinTable(name = "tb_patrimony_category", joinColumns = @JoinColumn(name = "patrimony_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private Set<Category> categories = new HashSet<>();
-	
+
 	@Embedded
 	private Audit audit = new Audit();
-	
-	public Patrimony () {
-		
+
+	public Patrimony() {
 	}
-	
+
 	@PrePersist
 	public void prePersist() {
 		generateCode();
 		audit.setDateRegister(Instant.now());
 	}
-	
+
 	@PreUpdate
 	public void preUpdate() {
 		audit.setDateLastEdition(Instant.now());
 	}
-	
+
 	private void generateCode() {
 		this.code = UUID.randomUUID().toString();
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -150,16 +142,16 @@ public class Patrimony implements Serializable {
 		this.departament = departament;
 	}
 
-	public Set<Category> getCategories() {
-		return categories;
-	}
-
 	public Audit getAudit() {
 		return audit;
 	}
 
 	public void setAudit(Audit audit) {
 		this.audit = audit;
+	}
+
+	public Set<Category> getCategories() {
+		return categories;
 	}
 
 	@Override
@@ -176,6 +168,7 @@ public class Patrimony implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Patrimony other = (Patrimony) obj;
-		return id == other.id;
+		return Objects.equals(id, other.id);
 	}
+
 }
